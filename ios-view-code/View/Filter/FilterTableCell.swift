@@ -22,17 +22,18 @@ final class FilterTableCell: UITableViewCell {
         super.awakeFromNib()
     }
     
-    func setupBasicElements() {
-        let bottomSeparatorView = UIView()
-        bottomSeparatorView.backgroundColor = Colors.basic
-        bottomSeparatorView.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(bottomSeparatorView)
+    func setupBasicElements(withBottomSeparator: Bool = true) {
+        if withBottomSeparator {
+            let bottomSeparatorView = UIView()
+            bottomSeparatorView.backgroundColor = Colors.graybase_Gray1
+            bottomSeparatorView.translatesAutoresizingMaskIntoConstraints = false
+            addSubview(bottomSeparatorView)
 
-        bottomSeparatorView.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
-        bottomSeparatorView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 0).isActive = true
-        bottomSeparatorView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: 0).isActive = true
-        bottomSeparatorView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: 0).isActive = true
-
+            bottomSeparatorView.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
+            bottomSeparatorView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 0).isActive = true
+            bottomSeparatorView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: 0).isActive = true
+            bottomSeparatorView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: 0).isActive = true
+        }
         
         buttonRadio.setImage(#imageLiteral(resourceName: "ic-radio-empty"), for: .normal)
         buttonRadio.addTarget(self, action: #selector(selectRadioOption), for: .touchUpInside)
@@ -48,12 +49,12 @@ final class FilterTableCell: UITableViewCell {
     }
     
     @objc func selectRadioOption() {
-        buttonRadio.selectedRadio = !buttonRadio.selectedRadio
         let image = buttonRadio.selectedRadio ? UIImage(named: "ic-radio-empty") : UIImage(named: "ic-radio-check")
         buttonRadio.setImage(image, for: .normal)
+        buttonRadio.selectedRadio = !buttonRadio.selectedRadio
     }
     
-    func makeLabelStack(withTwoLabels: Bool = true, titleStr: String, subTitleStr: String) {
+    func makeLabelStack(withTwoLabels: Bool = true, titleStr: String, subTitleStr: String = "") {
         title.text = titleStr
         subTitle.text = subTitleStr
         

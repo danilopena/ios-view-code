@@ -12,12 +12,17 @@
 "LOCATION" = "Location";
 "EPISODE" = "Episode";
 
+// Filter
+"NAME" = "Name";
+"GIVE_NAME" = "Give a name";
 "FILTER" = "Filter";
-"ATTENTION" = "Attention";
 "CLEAR" = "Clear";
+"APPLY" = "APPLY";
+
+
+"ATTENTION" = "Attention";
 "INFORMATION" = "Informations";
 "EPISODES" = "Episodes";
-"APPLY" = "APPLY";
 
 // NetworkLayer
 "MSG_PATTERN_ERROR" = "Ops! Something went wrong. Please try again later.";

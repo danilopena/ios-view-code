@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol FilterControllerDelegate {
+    func radioCellDeselection(cell: FilterTableCell)
+}
+
 final class FilterController: UIViewController {
 
     private var tableView: UITableView! {
@@ -18,6 +22,19 @@ final class FilterController: UIViewController {
         }
     }
     private let topView = UIView()
+    
+    // Number of rows on sections
+    private let sectionOrganizer = [0, 0, 0, 3, 4]
+    private let sectionHeight = [60.0, 20.0, 60.0, 44.0, 44.0]
+    
+    private let cellsStatusContent = [StatusCharEnum.alive.rawValue,
+                                      StatusCharEnum.dead.rawValue,
+                                      StatusCharEnum.unknown.rawValue]
+    
+    private let cellGenderContent = [GenderEnum.female.rawValue,
+                                     GenderEnum.male.rawValue,
+                                     GenderEnum.genderless.rawValue,
+                                     GenderEnum.unknown.rawValue]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,7 +67,7 @@ final class FilterController: UIViewController {
         titleController.translatesAutoresizingMaskIntoConstraints = false
         
         let viewSeparator = UIView()
-        viewSeparator.backgroundColor = Colors.basic
+        viewSeparator.backgroundColor = Colors.graybase_Gray1
 
         view.addSubview(topView)
         topView.addSubview(grayIndicator)
@@ -126,32 +143,99 @@ final class FilterController: UIViewController {
         tableView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 0).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0).isActive = true
     }
+    
+    func makeCellItems(content: [String], row: Int, section: Int) -> FilterTableCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "filterCell") as? FilterTableCell {
+            cell.selectionStyle = .none
+            
+            // Verifying last cell to add bottom separator.
+            if sectionOrganizer[section] == row + 1 {
+                cell.setupBasicElements()
+            } else {
+                cell.setupBasicElements(withBottomSeparator: false)
+            }
+            cell.makeLabelStack(withTwoLabels: true, titleStr: content[row])
+
+            return cell
+        }
+        return FilterTableCell()
+    }
+}
+
+extension FilterController: FilterControllerDelegate {
+    func radioCellDeselection(cell: FilterTableCell) {
+
+    }
 }
 
 extension FilterController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 5
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return sectionOrganizer[section]
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.section == 3 {
+            return makeCellItems(content: cellsStatusContent, row: indexPath.row, section: indexPath.section)
+        } else if indexPath.section == 4 {
+            return makeCellItems(content: cellGenderContent, row: indexPath.row, section: indexPath.section)
+        }
         
         return UITableViewCell()
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if section == 0 || section == 1 {
+        if section == 1 {
+            let cellSpacer = UITableViewCell()
+            let bottomSeparatorView = UIView()
+            bottomSeparatorView.backgroundColor = Colors.graybase_Gray1
+            bottomSeparatorView.translatesAutoresizingMaskIntoConstraints = false
+            cellSpacer.addSubview(bottomSeparatorView)
+
+            bottomSeparatorView.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
+            bottomSeparatorView.leadingAnchor.constraint(equalTo: cellSpacer.safeAreaLayoutGuide.leadingAnchor, constant: 0).isActive = true
+            bottomSeparatorView.trailingAnchor.constraint(equalTo: cellSpacer.safeAreaLayoutGuide.trailingAnchor, constant: 0).isActive = true
+            bottomSeparatorView.bottomAnchor.constraint(equalTo: cellSpacer.safeAreaLayoutGuide.bottomAnchor, constant: 0).isActive = true
+            
+            return cellSpacer
+        }
+        if section == 0 || section == 2 {
             if let cell = tableView.dequeueReusableCell(withIdentifier: "filterCell") as? FilterTableCell {
                 cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
                 cell.setupBasicElements()
-                cell.setupBasicElements()
-                cell.makeLabelStack(titleStr: "Name", subTitleStr: "Give a name")
+                if section == 0 {
+                    cell.makeLabelStack(titleStr: "Name", subTitleStr: "Give a name")
+                } else {
+                    cell.makeLabelStack(titleStr: "Species", subTitleStr: "Select one")
+                }
 
                 return cell
             }
+        } else {
+            let cell = UITableViewCell()
+            let label = UILabel()
+            label.text = "Teste"
+            label.translatesAutoresizingMaskIntoConstraints = false
+            label.textColor = Colors.graybase_Gray1
+            cell.addSubview(label)
+            
+            label.leadingAnchor.constraint(equalTo: cell.layoutMarginsGuide.leadingAnchor, constant: 0).isActive = true
+            label.bottomAnchor.constraint(equalTo: cell.layoutMarginsGuide.bottomAnchor, constant: 0).isActive = true
+            
+            let bottomSeparatorView = UIView()
+            bottomSeparatorView.backgroundColor = Colors.graybase_Gray1
+            bottomSeparatorView.translatesAutoresizingMaskIntoConstraints = false
+            cell.addSubview(bottomSeparatorView)
+
+            bottomSeparatorView.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
+            bottomSeparatorView.leadingAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.leadingAnchor, constant: 0).isActive = true
+            bottomSeparatorView.trailingAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.trailingAnchor, constant: 0).isActive = true
+            bottomSeparatorView.bottomAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.bottomAnchor, constant: 0).isActive = true
+            
+            return cell
         }
         
         return UITableViewCell()
@@ -162,6 +246,6 @@ extension FilterController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 60
+        return CGFloat(sectionHeight[section])
     }
 }

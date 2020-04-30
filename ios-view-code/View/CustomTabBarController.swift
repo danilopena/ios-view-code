@@ -24,11 +24,13 @@ class CustomTabBarController: UITabBarController {
         
         let location = UIViewController()
         location.tabBarItem.title = "Location"
-        location.view.backgroundColor = .green
-        
+        location.tabBarItem.image = #imageLiteral(resourceName: "ic-tab-location")
+        location.view.backgroundColor = .white
+
         let episode = UIViewController()
         episode.tabBarItem.title = "Episode"
-        episode.view.backgroundColor = .blue
+        episode.tabBarItem.image = #imageLiteral(resourceName: "ic-tab-episode")
+        episode.view.backgroundColor = .white
 
         viewControllers = [navCharacter, location, episode]
     }
@@ -38,7 +40,6 @@ class CustomTabBarController: UITabBarController {
         tabBar.unselectedItemTintColor = Colors.graybase_Gray1
         tabBar.tintColor = Colors.indigo
     }
-    
     
 
     /*
