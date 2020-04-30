@@ -1,0 +1,23 @@
+/* 
+  Localizable.strings
+  ios-view-code
+
+  Created by Danilo Pena on 30/04/20.
+  Copyright © 2020 Danilo Pena. All rights reserved.
+*/
+
+// CustomTabBarController
+"CHARACTER" = "Character";
+"CHARACTERS" = "Charascters";
+"LOCATION" = "Location";
+"EPISODE" = "Episode";
+
+"FILTER" = "Filter";
+"ATTENTION" = "Attention";
+"CLEAR" = "Clear";
+"INFORMATION" = "Informations";
+"EPISODES" = "Episodes";
+"APPLY" = "APPLY";
+
+// NetworkLayer
+"MSG_PATTERN_ERROR" = "Ops! Something went wrong. Please try again later.";

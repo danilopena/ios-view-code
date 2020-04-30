@@ -1,15 +1,15 @@
 //
-//  ios_swift_view_codeTests.swift
-//  ios-swift-view-codeTests
+//  ios_view_codeTests.swift
+//  ios-view-codeTests
 //
 //  Created by Danilo Pena on 28/04/20.
 //  Copyright © 2020 Danilo Pena. All rights reserved.
 //
 
 import XCTest
-@testable import ios_swift_view_code
+@testable import ios_view_code
 
-class ios_swift_view_codeTests: XCTestCase {
+class ios_view_codeTests: XCTestCase {
 
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
