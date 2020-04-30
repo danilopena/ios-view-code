@@ -30,6 +30,7 @@
 		714C54A4245B497A001179E4 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714C54A3245B497A001179E4 /* String+Extension.swift */; };
 		714C54A7245B5D42001179E4 /* StatusCharEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714C54A6245B5D42001179E4 /* StatusCharEnum.swift */; };
 		714C54A9245B5D8B001179E4 /* GenderEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714C54A8245B5D8B001179E4 /* GenderEnum.swift */; };
+		714C54AB245B7DEE001179E4 /* FilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714C54AA245B7DEE001179E4 /* FilterViewModel.swift */; };
 		71B7196C2458A782009A165D /* NetworkLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B719692458A782009A165D /* NetworkLayer.swift */; };
 		71B7196D2458A782009A165D /* CharacterRickAndMorty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B7196B2458A782009A165D /* CharacterRickAndMorty.swift */; };
 		71B719702458A7C1009A165D /* CharacterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B7196F2458A7C1009A165D /* CharacterViewModel.swift */; };
@@ -73,6 +74,7 @@
 		714C54A3245B497A001179E4 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		714C54A6245B5D42001179E4 /* StatusCharEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusCharEnum.swift; sourceTree = "<group>"; };
 		714C54A8245B5D8B001179E4 /* GenderEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderEnum.swift; sourceTree = "<group>"; };
+		714C54AA245B7DEE001179E4 /* FilterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewModel.swift; sourceTree = "<group>"; };
 		71B719692458A782009A165D /* NetworkLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkLayer.swift; sourceTree = "<group>"; };
 		71B7196B2458A782009A165D /* CharacterRickAndMorty.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharacterRickAndMorty.swift; sourceTree = "<group>"; };
 		71B7196F2458A7C1009A165D /* CharacterViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharacterViewModel.swift; sourceTree = "<group>"; };
@@ -229,6 +231,7 @@
 			children = (
 				71B7196F2458A7C1009A165D /* CharacterViewModel.swift */,
 				714C54962459E191001179E4 /* CharacterDetailViewModel.swift */,
+				714C54AA245B7DEE001179E4 /* FilterViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -354,6 +357,7 @@
 				7118BD282458BBBB00111A7A /* FilterController.swift in Sources */,
 				7118BD242458AC7400111A7A /* UIViewController+Extensions.swift in Sources */,
 				7128769A2458813A00BF0D75 /* Colors.swift in Sources */,
+				714C54AB245B7DEE001179E4 /* FilterViewModel.swift in Sources */,
 				714C54A9245B5D8B001179E4 /* GenderEnum.swift in Sources */,
 				71B7196D2458A782009A165D /* CharacterRickAndMorty.swift in Sources */,
 				714C54972459E191001179E4 /* CharacterDetailViewModel.swift in Sources */,

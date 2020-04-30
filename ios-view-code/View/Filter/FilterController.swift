@@ -18,10 +18,10 @@ final class FilterController: UIViewController {
         didSet {
             tableView.delegate = self
             tableView.dataSource = self
-            tableView.register(FilterTableCell.self, forCellReuseIdentifier: "filterCell")
         }
     }
     private let topView = UIView()
+    private var viewModel: FilterViewModel!
     
     // Number of rows on sections
     private let sectionOrganizer = [0, 0, 0, 3, 4]
@@ -38,6 +38,7 @@ final class FilterController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel = FilterViewModel(delegate: self)
 
         makeTopView()
         makeTableViewLayout()
@@ -63,7 +64,7 @@ final class FilterController: UIViewController {
         grayIndicator.translatesAutoresizingMaskIntoConstraints = false
         
         let titleController = UILabel()
-        titleController.text = "Filter"
+        titleController.text = viewModel.filterString
         titleController.translatesAutoresizingMaskIntoConstraints = false
         
         let viewSeparator = UIView()
@@ -75,40 +76,105 @@ final class FilterController: UIViewController {
         topView.addSubview(viewSeparator)
 
         // TopView Constraints
-        topView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0).isActive = true
-        topView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: 0).isActive = true
-        topView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 0).isActive = true
-        topView.heightAnchor.constraint(equalToConstant: 70).isActive = true
+        topView
+            .topAnchor
+            .constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,
+                        constant: 0)
+            .isActive = true
+        
+        topView
+            .rightAnchor
+            .constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor,
+                        constant: 0)
+            .isActive = true
+        
+        topView
+            .leftAnchor
+            .constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 0).isActive = true
+        
+        topView
+            .heightAnchor
+            .constraint(equalToConstant: 70)
+            .isActive = true
                 
         // GrayIndicator Constraints
-        grayIndicator.heightAnchor.constraint(equalToConstant: 5).isActive = true
-        grayIndicator.widthAnchor.constraint(equalToConstant: 36).isActive = true
-        grayIndicator.centerXAnchor.constraint(equalTo: topView.safeAreaLayoutGuide.centerXAnchor).isActive = true
-        grayIndicator.topAnchor.constraint(equalTo: topView.safeAreaLayoutGuide.topAnchor, constant: 6).isActive = true
+        grayIndicator
+            .heightAnchor
+            .constraint(equalToConstant: 5)
+            .isActive = true
+        
+        grayIndicator
+            .widthAnchor
+            .constraint(equalToConstant: 36)
+            .isActive = true
+        
+        grayIndicator
+            .centerXAnchor
+            .constraint(equalTo: topView.safeAreaLayoutGuide.centerXAnchor)
+            .isActive = true
+        
+        grayIndicator
+            .topAnchor
+            .constraint(equalTo: topView.safeAreaLayoutGuide.topAnchor,
+                        constant: 6)
+            .isActive = true
         
         // TitleController Constraints
-        titleController.centerXAnchor.constraint(equalTo: topView.safeAreaLayoutGuide.centerXAnchor).isActive = true
-        titleController.centerYAnchor.constraint(equalTo: topView.safeAreaLayoutGuide.centerYAnchor).isActive = true
+        titleController
+            .centerXAnchor
+            .constraint(equalTo: topView.safeAreaLayoutGuide.centerXAnchor)
+            .isActive = true
+        
+        titleController
+            .centerYAnchor
+            .constraint(equalTo: topView.safeAreaLayoutGuide.centerYAnchor)
+            .isActive = true
         
         // ViewSeparator Constraints
         viewSeparator.translatesAutoresizingMaskIntoConstraints = false
-        viewSeparator.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
-        viewSeparator.leadingAnchor.constraint(equalTo: topView.safeAreaLayoutGuide.leadingAnchor, constant: 0).isActive = true
-        viewSeparator.trailingAnchor.constraint(equalTo: topView.safeAreaLayoutGuide.trailingAnchor, constant: 0).isActive = true
-        viewSeparator.bottomAnchor.constraint(equalTo: topView.safeAreaLayoutGuide.bottomAnchor, constant: 0).isActive = true
+        viewSeparator
+            .heightAnchor
+            .constraint(equalToConstant: 0.5)
+            .isActive = true
+        
+        viewSeparator
+            .leadingAnchor
+            .constraint(equalTo: topView.safeAreaLayoutGuide.leadingAnchor,
+                        constant: 0)
+            .isActive = true
+        
+        viewSeparator
+            .trailingAnchor
+            .constraint(equalTo: topView.safeAreaLayoutGuide.trailingAnchor,
+                        constant: 0)
+            .isActive = true
+        
+        viewSeparator
+            .bottomAnchor
+            .constraint(equalTo: topView.safeAreaLayoutGuide.bottomAnchor,
+                        constant: 0)
+            .isActive = true
     }
     
     func addClearButton() {
         let clearButton = UIButton()
         clearButton.setTitleColor(Colors.indigo, for: .normal)
-        clearButton.setTitle("Clear", for: .normal)
+        clearButton.setTitle(viewModel.clearString, for: .normal)
         clearButton.addTarget(self, action: #selector(clearFilter), for: .touchUpInside)
         clearButton.translatesAutoresizingMaskIntoConstraints = false
         
         topView.addSubview(clearButton)
         
-        clearButton.centerYAnchor.constraint(equalTo: topView.safeAreaLayoutGuide.centerYAnchor).isActive = true
-        clearButton.leadingAnchor.constraint(equalTo: topView.safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true
+        clearButton
+            .centerYAnchor
+            .constraint(equalTo: topView.safeAreaLayoutGuide.centerYAnchor)
+            .isActive = true
+        
+        clearButton
+            .leadingAnchor
+            .constraint(equalTo: topView.safeAreaLayoutGuide.leadingAnchor,
+                        constant: 10)
+            .isActive = true
     }
     
     @objc func clearFilter() {}
@@ -121,31 +187,59 @@ final class FilterController: UIViewController {
         button.layer.cornerRadius = 14
         button.backgroundColor = Colors.indigo
         button.setTitleColor(.white, for: .normal)
-        button.setTitle("APPLY", for: .normal)
+        button.setTitle(viewModel.applyString, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         button.addTarget(self, action: #selector(applyFilter), for: .touchUpInside)
         
         topView.addSubview(button)
         
-        button.centerYAnchor.constraint(equalTo: topView.safeAreaLayoutGuide.centerYAnchor).isActive = true
-        button.trailingAnchor.constraint(equalTo: topView.safeAreaLayoutGuide.trailingAnchor, constant: -10).isActive = true
+        button
+            .centerYAnchor
+            .constraint(equalTo: topView.safeAreaLayoutGuide.centerYAnchor)
+            .isActive = true
+        
+        button
+            .trailingAnchor
+            .constraint(equalTo: topView.safeAreaLayoutGuide.trailingAnchor,
+                        constant: -10)
+            .isActive = true
     }
     
     @objc func applyFilter() {}
     
     func makeTableViewLayout() {
         tableView = UITableView()
-        
+        tableView.register(FilterTableCell.self, forCellReuseIdentifier: FilterViewModel.filterCellIdenfier)
+
         view.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.topAnchor.constraint(equalTo: topView.safeAreaLayoutGuide.bottomAnchor, constant: 0).isActive = true
-        tableView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: 0).isActive = true
-        tableView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 0).isActive = true
-        tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0).isActive = true
+        tableView
+            .topAnchor
+            .constraint(equalTo: topView.safeAreaLayoutGuide.bottomAnchor,
+                        constant: 0)
+            .isActive = true
+        
+        tableView
+            .rightAnchor
+            .constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor,
+                        constant: 0)
+            .isActive = true
+        
+        tableView
+            .leftAnchor
+            .constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor,
+                        constant: 0)
+            .isActive = true
+        
+        tableView
+            .bottomAnchor
+            .constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor,
+                        constant: 0)
+            .isActive = true
     }
     
     func makeCellItems(content: [String], row: Int, section: Int) -> FilterTableCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "filterCell") as? FilterTableCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: FilterViewModel.filterCellIdenfier) as? FilterTableCell {
             cell.selectionStyle = .none
             
             // Verifying last cell to add bottom separator.
@@ -165,6 +259,12 @@ final class FilterController: UIViewController {
 extension FilterController: FilterControllerDelegate {
     func radioCellDeselection(cell: FilterTableCell) {
 
+    }
+}
+
+extension FilterController: PatternViewModelDelegate {
+    func loaded(state: State) {
+        
     }
 }
 
@@ -195,21 +295,39 @@ extension FilterController: UITableViewDataSource, UITableViewDelegate {
             bottomSeparatorView.translatesAutoresizingMaskIntoConstraints = false
             cellSpacer.addSubview(bottomSeparatorView)
 
-            bottomSeparatorView.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
-            bottomSeparatorView.leadingAnchor.constraint(equalTo: cellSpacer.safeAreaLayoutGuide.leadingAnchor, constant: 0).isActive = true
-            bottomSeparatorView.trailingAnchor.constraint(equalTo: cellSpacer.safeAreaLayoutGuide.trailingAnchor, constant: 0).isActive = true
-            bottomSeparatorView.bottomAnchor.constraint(equalTo: cellSpacer.safeAreaLayoutGuide.bottomAnchor, constant: 0).isActive = true
+            bottomSeparatorView
+                .heightAnchor
+                .constraint(equalToConstant: 0.5)
+                .isActive = true
+            bottomSeparatorView
+                .leadingAnchor
+                .constraint(equalTo: cellSpacer.safeAreaLayoutGuide.leadingAnchor,
+                            constant: 0)
+                .isActive = true
+            bottomSeparatorView
+                .trailingAnchor
+                .constraint(equalTo: cellSpacer.safeAreaLayoutGuide.trailingAnchor,
+                            constant: 0)
+                .isActive = true
+            
+            bottomSeparatorView
+                .bottomAnchor
+                .constraint(equalTo: cellSpacer.safeAreaLayoutGuide.bottomAnchor,
+                            constant: 0)
+                .isActive = true
             
             return cellSpacer
         }
         if section == 0 || section == 2 {
-            if let cell = tableView.dequeueReusableCell(withIdentifier: "filterCell") as? FilterTableCell {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: FilterViewModel.filterCellIdenfier) as? FilterTableCell {
                 cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
                 cell.setupBasicElements()
                 if section == 0 {
-                    cell.makeLabelStack(titleStr: "Name", subTitleStr: "Give a name")
+                    cell.makeLabelStack(titleStr: viewModel.nameString,
+                                        subTitleStr: viewModel.giveNameString)
                 } else {
-                    cell.makeLabelStack(titleStr: "Species", subTitleStr: "Select one")
+                    cell.makeLabelStack(titleStr: viewModel.speciesString,
+                                        subTitleStr: viewModel.selectOneString)
                 }
 
                 return cell
@@ -222,18 +340,45 @@ extension FilterController: UITableViewDataSource, UITableViewDelegate {
             label.textColor = Colors.graybase_Gray1
             cell.addSubview(label)
             
-            label.leadingAnchor.constraint(equalTo: cell.layoutMarginsGuide.leadingAnchor, constant: 0).isActive = true
-            label.bottomAnchor.constraint(equalTo: cell.layoutMarginsGuide.bottomAnchor, constant: 0).isActive = true
+            label
+                .leadingAnchor
+                .constraint(equalTo: cell.layoutMarginsGuide.leadingAnchor,
+                            constant: 0)
+                .isActive = true
+            
+            label
+                .bottomAnchor
+                .constraint(equalTo: cell.layoutMarginsGuide.bottomAnchor,
+                            constant: 0)
+                .isActive = true
             
             let bottomSeparatorView = UIView()
             bottomSeparatorView.backgroundColor = Colors.graybase_Gray1
             bottomSeparatorView.translatesAutoresizingMaskIntoConstraints = false
             cell.addSubview(bottomSeparatorView)
 
-            bottomSeparatorView.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
-            bottomSeparatorView.leadingAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.leadingAnchor, constant: 0).isActive = true
-            bottomSeparatorView.trailingAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.trailingAnchor, constant: 0).isActive = true
-            bottomSeparatorView.bottomAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.bottomAnchor, constant: 0).isActive = true
+            bottomSeparatorView
+                .heightAnchor
+                .constraint(equalToConstant: 0.5)
+                .isActive = true
+            
+            bottomSeparatorView
+                .leadingAnchor
+                .constraint(equalTo: cell.safeAreaLayoutGuide.leadingAnchor,
+                            constant: 0)
+                .isActive = true
+            
+            bottomSeparatorView
+                .trailingAnchor
+                .constraint(equalTo: cell.safeAreaLayoutGuide.trailingAnchor,
+                            constant: 0)
+                .isActive = true
+            
+            bottomSeparatorView
+                .bottomAnchor
+                .constraint(equalTo: cell.safeAreaLayoutGuide.bottomAnchor,
+                            constant: 0)
+                .isActive = true
             
             return cell
         }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PageInfo: Codable {
+struct PageInfo: Codable {
     var count: Int?
     var pages: Int?
     var next: String?

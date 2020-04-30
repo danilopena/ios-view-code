@@ -70,10 +70,55 @@ class CharacterDetailViewModel {
     func arrangeInfoData() {
         informationsData = [(title: String, subTitle: String)]()
         if let charNotNull = char {
-            informationsData.append((title: "Gender", subTitle: charNotNull.gender ?? ""))
-            informationsData.append((title: "Origin", subTitle: charNotNull.origin?.name ?? ""))
-            informationsData.append((title: "Type", subTitle: charNotNull.type ?? ""))
-            informationsData.append((title: "Location", subTitle: charNotNull.location?.name ?? ""))
+            informationsData.append((title: Localizable.gender,
+                                     subTitle: charNotNull.gender ?? ""))
+            informationsData.append((title: Localizable.origin,
+                                     subTitle: charNotNull.origin?.name ?? ""))
+            informationsData.append((title: Localizable.type,
+                                     subTitle: charNotNull.type ?? ""))
+            informationsData.append((title: Localizable.location,
+                                     subTitle: charNotNull.location?.name ?? ""))
         }
+    }
+}
+
+extension CharacterDetailViewModel {
+    private enum Localizable {
+        static let gender = "GENDER"
+        static let origin = "ORIGIN"
+        static let type = "TYPE"
+        static let location = "LOCATION"
+        static let informations = "INFORMATION"
+        static let episodes = "EPISODES"
+        static let attention = "ATTENTION"
+
+    }
+
+    var genderString: String {
+       return Localizable.gender.localized
+    }
+
+    var originString: String {
+       return Localizable.origin.localized
+    }
+    
+    var typeString: String {
+        return Localizable.type.localized
+    }
+    
+    var locationString: String {
+        return Localizable.location.localized
+    }
+    
+    var informationsString: String {
+        return Localizable.informations.localized
+    }
+    
+    var episodesString: String {
+        return Localizable.episodes.localized
+    }
+    
+    var attentionString: String {
+        return Localizable.attention.localized
     }
 }

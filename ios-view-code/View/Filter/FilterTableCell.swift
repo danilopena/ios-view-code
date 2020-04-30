@@ -29,10 +29,28 @@ final class FilterTableCell: UITableViewCell {
             bottomSeparatorView.translatesAutoresizingMaskIntoConstraints = false
             addSubview(bottomSeparatorView)
 
-            bottomSeparatorView.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
-            bottomSeparatorView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 0).isActive = true
-            bottomSeparatorView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: 0).isActive = true
-            bottomSeparatorView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: 0).isActive = true
+            bottomSeparatorView
+                .heightAnchor
+                .constraint(equalToConstant: 0.5)
+                .isActive = true
+            
+            bottomSeparatorView
+                .leadingAnchor
+                .constraint(equalTo: safeAreaLayoutGuide.leadingAnchor,
+                            constant: 0)
+                .isActive = true
+            
+            bottomSeparatorView
+                .trailingAnchor
+                .constraint(equalTo: safeAreaLayoutGuide.trailingAnchor,
+                            constant: 0)
+                .isActive = true
+            
+            bottomSeparatorView
+                .bottomAnchor
+                .constraint(equalTo: safeAreaLayoutGuide.bottomAnchor,
+                            constant: 0)
+                .isActive = true
         }
         
         buttonRadio.setImage(#imageLiteral(resourceName: "ic-radio-empty"), for: .normal)
@@ -40,10 +58,26 @@ final class FilterTableCell: UITableViewCell {
         addSubview(buttonRadio)
         
         buttonRadio.translatesAutoresizingMaskIntoConstraints = false
-        buttonRadio.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 0).isActive = true
-        buttonRadio.centerYAnchor.constraint(equalTo: safeAreaLayoutGuide.centerYAnchor).isActive = true
-        buttonRadio.widthAnchor.constraint(equalToConstant: 44).isActive = true
-        buttonRadio.heightAnchor.constraint(equalToConstant: 44).isActive = true
+        buttonRadio
+            .leadingAnchor
+            .constraint(equalTo: safeAreaLayoutGuide.leadingAnchor,
+                        constant: 0)
+            .isActive = true
+        
+        buttonRadio
+            .centerYAnchor
+            .constraint(equalTo: safeAreaLayoutGuide.centerYAnchor)
+            .isActive = true
+        
+        buttonRadio
+            .widthAnchor
+            .constraint(equalToConstant: 44)
+            .isActive = true
+        
+        buttonRadio
+            .heightAnchor
+            .constraint(equalToConstant: 44)
+            .isActive = true
         
         subTitle.textColor = Colors.graybase_Gray1
     }
@@ -67,9 +101,22 @@ final class FilterTableCell: UITableViewCell {
         
         addSubview(stack)
         
-        stack.leadingAnchor.constraint(equalTo: buttonRadio.trailingAnchor, constant: 10).isActive = true
-        stack.centerYAnchor.constraint(equalTo: safeAreaLayoutGuide.centerYAnchor).isActive = true
-        stack.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: 10).isActive = true
+        stack
+            .leadingAnchor
+            .constraint(equalTo: buttonRadio.trailingAnchor,
+                        constant: 10)
+            .isActive = true
+        
+        stack
+            .centerYAnchor
+            .constraint(equalTo: safeAreaLayoutGuide.centerYAnchor)
+            .isActive = true
+        
+        stack
+            .trailingAnchor
+            .constraint(equalTo: safeAreaLayoutGuide.trailingAnchor,
+                        constant: 10)
+            .isActive = true
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

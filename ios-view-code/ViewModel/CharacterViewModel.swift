@@ -45,3 +45,18 @@ class CharacterViewModel {
         return chars?[index]
     }
 }
+
+extension CharacterViewModel {
+    private enum Localizable {
+        static let filter = "FILTER"
+        static let attention = "ATTENTION"
+    }
+    
+    var filterString: String {
+        return Localizable.filter.localized
+    }
+    
+    var attentionString: String {
+        return Localizable.attention.localized
+    }
+}

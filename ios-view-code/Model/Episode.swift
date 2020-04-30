@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Episode: Codable {
+struct Episode: Codable {
     var id: Int?
     var name: String?
     var air_date: String?

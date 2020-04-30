@@ -32,7 +32,7 @@ final class CharacterController: UIViewController {
     
     // Mark: - Support methods
     func addBarButtonItem() {
-        let barButton = UIBarButtonItem(title: "Filter", style: .plain, target: self, action: #selector(showFilter))
+        let barButton = UIBarButtonItem(title: viewModel.filterString, style: .plain, target: self, action: #selector(showFilter))
         barButton.setTitleTextAttributes([.foregroundColor: Colors.indigo ?? .blue,
                                           .font: UIFont.boldSystemFont(ofSize: 18)],
                                          for: .normal)
@@ -56,10 +56,29 @@ final class CharacterController: UIViewController {
         
         view.addSubview(collectionView)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0).isActive = true
-        collectionView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: 0).isActive = true
-        collectionView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 0).isActive = true
-        collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0).isActive = true
+        collectionView
+            .topAnchor
+            .constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,
+                        constant: 0)
+            .isActive = true
+        
+        collectionView
+            .rightAnchor
+            .constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor,
+                        constant: 0)
+            .isActive = true
+        
+        collectionView
+            .leftAnchor
+            .constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor,
+                        constant: 0)
+            .isActive = true
+        
+        collectionView
+            .bottomAnchor
+            .constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor,
+                        constant: 0)
+            .isActive = true
     }
 }
 
@@ -116,7 +135,7 @@ extension CharacterController: PatternViewModelDelegate {
             case .success:
                 self.collectionView.reloadData()
             case .failed(let error):
-                self.showAlert(with: "Attention", message: error)
+                self.showAlert(with: self.viewModel.attentionString, message: error)
             }
         }
     }

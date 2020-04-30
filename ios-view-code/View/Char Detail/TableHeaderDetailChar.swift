@@ -23,10 +23,28 @@ final class TableHeaderDetailChar: UITableViewHeaderFooterView {
         separatorView.translatesAutoresizingMaskIntoConstraints = false
 
         view.addSubview(separatorView)
-        separatorView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: 0).isActive = true
-        separatorView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 0).isActive = true
-        separatorView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0).isActive = true
-        separatorView.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
+        separatorView
+            .rightAnchor
+            .constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor,
+                        constant: 0)
+            .isActive = true
+        
+        separatorView
+            .leftAnchor
+            .constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor,
+                        constant: 0)
+            .isActive = true
+        
+        separatorView
+            .bottomAnchor
+            .constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor,
+                        constant: 0)
+            .isActive = true
+        
+        separatorView
+            .heightAnchor
+            .constraint(equalToConstant: 0.5)
+            .isActive = true
         
         let label = UILabel()
         label.text = self.title
@@ -35,9 +53,20 @@ final class TableHeaderDetailChar: UITableViewHeaderFooterView {
         view.addSubview(label)
 
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        label.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: 16).isActive = true
-        label.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 16).isActive = true
+        label
+            .centerYAnchor
+            .constraint(equalTo: view.centerYAnchor)
+            .isActive = true
+        
+        label
+            .rightAnchor
+            .constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: 16)
+            .isActive = true
+        
+        label
+            .leftAnchor
+            .constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 16)
+            .isActive = true
         
         addSubview(view)
     }

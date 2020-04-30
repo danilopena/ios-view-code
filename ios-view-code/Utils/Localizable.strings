@@ -12,6 +12,11 @@
 "LOCATION" = "Location";
 "EPISODE" = "Episode";
 
+// CharacterDetail
+"GENDER" = "Gender";
+"ORIGIN" = "Origin";
+"TYPE" = "Type";
+
 // Filter
 "NAME" = "Name";
 "GIVE_NAME" = "Give a name";

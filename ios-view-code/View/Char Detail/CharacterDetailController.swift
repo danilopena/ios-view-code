@@ -31,23 +31,61 @@ final class CharacterDetailController: UIViewController {
         view.backgroundColor = .white
         
         topView.backgroundColor = Colors.graybase_Gray6
-        view.addSubview(topView)
-        
         topView.translatesAutoresizingMaskIntoConstraints = false
-        topView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0).isActive = true
-        topView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: 0).isActive = true
-        topView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 0).isActive = true
-        topView.heightAnchor.constraint(equalToConstant: 254).isActive = true
+
+        view.addSubview(topView)
+        topView.addSubview(topImage)
+        topView.addSubview(charImage)
+
+        topView
+            .topAnchor
+            .constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,
+                        constant: 0)
+            .isActive = true
+        
+        topView
+            .rightAnchor
+            .constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor,
+                        constant: 0)
+            .isActive = true
+        
+        topView
+            .leftAnchor
+            .constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor,
+                        constant: 0)
+            .isActive = true
+        
+        topView
+            .heightAnchor
+            .constraint(equalToConstant: 254)
+            .isActive = true
         
         topImage.image = #imageLiteral(resourceName: "ic-header-detail")
         topImage.contentMode = .scaleAspectFill
-        topView.addSubview(topImage)
         
         topImage.translatesAutoresizingMaskIntoConstraints = false
-        topImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0).isActive = true
-        topImage.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: 0).isActive = true
-        topImage.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 0).isActive = true
-        topImage.heightAnchor.constraint(equalToConstant: 84).isActive = true
+        topImage
+            .topAnchor
+            .constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,
+                        constant: 0)
+            .isActive = true
+        
+        topImage
+            .rightAnchor
+            .constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor,
+                        constant: 0)
+            .isActive = true
+        
+        topImage
+            .leftAnchor
+            .constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor,
+                        constant: 0)
+            .isActive = true
+        
+        topImage
+            .heightAnchor
+            .constraint(equalToConstant: 84)
+            .isActive = true
         
         charImage.image = #imageLiteral(resourceName: "ic-char-test")
         charImage.layer.masksToBounds = true
@@ -55,27 +93,30 @@ final class CharacterDetailController: UIViewController {
         charImage.layer.borderColor = Colors.graybase_Gray6?.cgColor
         charImage.layer.cornerRadius = 65
         
-        topView.addSubview(charImage)
         charImage.translatesAutoresizingMaskIntoConstraints = false
-        charImage.topAnchor.constraint(equalTo: topImage.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
-        charImage.centerXAnchor.constraint(equalTo: topView.centerXAnchor).isActive = true
-        charImage.heightAnchor.constraint(equalToConstant: 130).isActive = true
-        charImage.widthAnchor.constraint(equalToConstant: 130).isActive = true
+        charImage
+            .topAnchor
+            .constraint(equalTo: topImage.safeAreaLayoutGuide.topAnchor,
+                        constant: 20)
+            .isActive = true
+        
+        charImage
+            .centerXAnchor
+            .constraint(equalTo: topView.centerXAnchor)
+            .isActive = true
+        
+        charImage
+            .heightAnchor
+            .constraint(equalToConstant: 130)
+            .isActive = true
+        
+        charImage
+            .widthAnchor
+            .constraint(equalToConstant: 130)
+            .isActive = true
         
         makeStackWithLabels()
-        
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.separatorStyle = .singleLine
-        tableView.register(TableHeaderDetailChar.self, forHeaderFooterViewReuseIdentifier: "header")
-        
-        view.addSubview(tableView)
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.topAnchor.constraint(equalTo: topView.safeAreaLayoutGuide.bottomAnchor, constant: 0).isActive = true
-        tableView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: 0).isActive = true
-        tableView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 0).isActive = true
-        tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0).isActive = true
-
+        makeTableViewWithInfosAndEpisodes()
     }
     
     init(idToDetail: Int) {
@@ -88,6 +129,40 @@ final class CharacterDetailController: UIViewController {
     }
     
     // Mark: - Support methods
+    func makeTableViewWithInfosAndEpisodes() {
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.separatorStyle = .singleLine
+        tableView.register(TableHeaderDetailChar.self, forHeaderFooterViewReuseIdentifier: Constants.header)
+        
+        view.addSubview(tableView)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        
+        tableView
+            .topAnchor
+            .constraint(equalTo: topView.safeAreaLayoutGuide.bottomAnchor,
+                        constant: 0)
+            .isActive = true
+        
+        tableView
+            .rightAnchor
+            .constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor,
+                        constant: 0)
+            .isActive = true
+        
+        tableView
+            .leftAnchor
+            .constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor,
+                        constant: 0)
+            .isActive = true
+        
+        tableView
+            .bottomAnchor
+            .constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor,
+                        constant: 0)
+            .isActive = true
+    }
+    
     func makeStackWithLabels() {
         let stackLabels = UIStackView()
         stackLabels.alignment = .center
@@ -109,8 +184,16 @@ final class CharacterDetailController: UIViewController {
         stackLabels.addArrangedSubview(species)
 
         topView.addSubview(stackLabels)
-        stackLabels.topAnchor.constraint(equalTo: charImage.safeAreaLayoutGuide.bottomAnchor, constant: 10).isActive = true
-        stackLabels.centerXAnchor.constraint(equalTo: topView.centerXAnchor).isActive = true
+        stackLabels
+            .topAnchor
+            .constraint(equalTo: charImage.safeAreaLayoutGuide.bottomAnchor,
+                        constant: 10)
+            .isActive = true
+        
+        stackLabels
+            .centerXAnchor
+            .constraint(equalTo: topView.centerXAnchor)
+            .isActive = true
     }
     
     func populateTopCharData() {
@@ -135,7 +218,7 @@ final class CharacterDetailController: UIViewController {
     }
     
     func makeHeaderCell(title: String) -> TableHeaderDetailChar {
-        if let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "header") as? TableHeaderDetailChar {
+        if let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: Constants.header) as? TableHeaderDetailChar {
             header.title = title
             header.makeLayout()
             return header
@@ -151,9 +234,9 @@ extension CharacterDetailController: UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == 0 {
-            return makeHeaderCell(title: "Informations")
+            return makeHeaderCell(title: viewModel.informationsString)
         } else {
-            return makeHeaderCell(title: "Episodes")
+            return makeHeaderCell(title: viewModel.episodesString)
         }
     }
     
@@ -171,7 +254,7 @@ extension CharacterDetailController: UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
-            let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "basicCell")
+            let cell = UITableViewCell(style: .subtitle, reuseIdentifier: Constants.basicCellIdenfier)
             cell.selectionStyle = .none
             cell.textLabel?.text = viewModel.informationsData[indexPath.row].title
             cell.detailTextLabel?.text = viewModel.informationsData[indexPath.row].subTitle
@@ -179,7 +262,7 @@ extension CharacterDetailController: UITableViewDelegate, UITableViewDataSource 
 
             return cell
         } else {
-            let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "basicCell")
+            let cell = UITableViewCell(style: .subtitle, reuseIdentifier: Constants.basicCellIdenfier)
             cell.selectionStyle = .none
             cell.textLabel?.text = viewModel.episodeList[indexPath.row].episode
             cell.detailTextLabel?.text = viewModel.episodeList[indexPath.row].name
@@ -187,6 +270,13 @@ extension CharacterDetailController: UITableViewDelegate, UITableViewDataSource 
             
             return cell
         }
+    }
+}
+
+private extension CharacterDetailController {
+    private enum Constants {
+        static let basicCellIdenfier = "basicCell"
+        static let header            = "header"
     }
 }
 
@@ -198,7 +288,7 @@ extension CharacterDetailController: CharacterDetailViewModelDelegate {
                 self.tableView.reloadSections(IndexSet(integer: 1), with: .fade)
                 break
             case .failed(let error):
-                self.showAlert(with: "Attention", message: error)
+                self.showAlert(with: self.viewModel.attentionString, message: error)
             }
         }
 
@@ -215,7 +305,7 @@ extension CharacterDetailController: CharacterDetailViewModelDelegate {
                 self.tableView.reloadData()
                 break
             case .failed(let error):
-                self.showAlert(with: "Attention", message: error)
+                self.showAlert(with: self.viewModel.attentionString, message: error)
             }
         }
     }

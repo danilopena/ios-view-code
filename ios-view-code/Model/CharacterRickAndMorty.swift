@@ -8,17 +8,17 @@
 
 import UIKit
 
-class StandardNameAndUrl: Codable {
+struct StandardNameAndUrl: Codable {
     var name: String?
     var url: String?
 }
 
-class WrapperCharacters: Codable {
+struct WrapperCharacters: Codable {
     var info: PageInfo?
     var results: [CharacterRickAndMorty]?
 }
 
-class CharacterRickAndMorty: Codable {
+struct CharacterRickAndMorty: Codable {
     var id: Int!
     var name: String?
     var status: String?
